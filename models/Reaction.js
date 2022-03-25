@@ -2,11 +2,38 @@
 const { Schema, model } = require('mongoose');
 const reactionSchema = require('./Reaction');
 
-// reactionId
-
-// Use Mongoose's ObjectId data type
-// Default value is set to a new ObjectId
-// reactionBody
+const ReactionSchema = new Schema(
+    // reactionId
+    {
+        // set custom id to avoid confusion with parent reaction _id
+        reactionId: {
+            type: Schema.Types.ObjectId,
+            default: () => new Types.ObjectId()
+        },
+        // Use Mongoose's ObjectId data type
+        // Default value is set to a new ObjectId
+        // reactionBody
+        replyBody: {
+            type: String,
+            required: true
+        }, 
+        username: {
+            type: String,
+            required: true,
+            trim: true
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+            get: createdAtVal => dateFormat(createdAtVal)
+        }
+    },
+    {
+        toJSON: {
+            getters: true
+        }
+    }
+);
 
 // String
 // Required
