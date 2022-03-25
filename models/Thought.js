@@ -1,11 +1,12 @@
 const { Schema, model } = require('mongoose');
+const dateFormat = require('../utils/dateFormat');
 
-const ThoughtSchmea = new Schema({
+const ThoughtSchema = new Schema({
     thoughtText:{
         type: String,
         required: 'Thought is required', 
         trim: true,
-        // 1 - 280 chars
+        // 1-280 CHARS
     },
       createdAt: {
         type: Date,
