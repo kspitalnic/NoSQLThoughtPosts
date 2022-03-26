@@ -231,5 +231,4 @@ Application deletes a user's associated thoughts when the user is deleted.
 
 
 
---thought routes work 
--- need user and posting a reaction 
+--- need user to connect to "user name" - should it create a new user when given the username on the post if username not already in use? 
