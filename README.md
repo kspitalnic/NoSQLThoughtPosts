@@ -228,3 +228,8 @@ Repository contains a high-quality README with description and a link to a walkt
 
 Bonus: +10 Points
 Application deletes a user's associated thoughts when the user is deleted.
+
+
+
+--thought routes work 
+-- need user and posting a reaction 
