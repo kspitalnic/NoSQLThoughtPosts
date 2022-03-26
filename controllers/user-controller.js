@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Thought } = require('../models');
 
 const userController = {
     // get all users
@@ -62,7 +62,7 @@ const userController = {
     // add friend
     addFriend({ params }, res) {
         User.findOneAndUpdate(
-            { __id: params.id },
+            { __id: params.userId },
             { $push: { friends: params.friendId } },
             { new: true }
         )
@@ -80,7 +80,7 @@ const userController = {
     // delete friend
     deleteFriend({ params }, res) {
         User.findOneAndUpdate(
-          { _id: params.id },
+          { _id: params.userId },
           { $pull: { friends: params.friendId } },
           { new: true }
         )

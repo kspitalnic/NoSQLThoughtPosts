@@ -6,8 +6,8 @@ const ThoughtSchema = new Schema({
         type: String,
         required: 'Thought is required', 
         trim: true,
-        // 1-280 CHARS
-    },
+        maxlength: 280
+      },
       createdAt: {
         type: Date,
         default: Date.now,
