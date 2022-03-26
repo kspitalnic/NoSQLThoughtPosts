@@ -1,3 +1,4 @@
+const res = require('express/lib/response');
 const { User } = require('../models');
 
 const userController = {
@@ -5,7 +6,7 @@ const userController = {
     getAllUsers(req, res) {
         User.find({})
         .populate({
-            path: 'reactions',
+            path: 'thoughts',
             select:'-__v'
         })
         .select('-__v')
@@ -21,7 +22,7 @@ const userController = {
   getUserById({ params }, res) {
     Thought.findOne({ _id: params.id })
       .populate({
-        path: 'reactions',
+        path: 'thoughts',
         select: '-__v'
       })
       .select('-__v')
@@ -57,8 +58,42 @@ const userController = {
     User.findOneAndDelete({ _id: params.id })
       .then(dbUserData => res.json(dbUserData))
       .catch(err => res.json(err));
-  }
-};
+  },
 
+    // add friend
+    addFriend({ params }, res) {
+        User.findOneAndUpdate(
+            { __id: params.id },
+            { $push: { friends: params.friendId } },
+            { new: true }
+        )
+        .then((dbUserData) => {
+            if (!dbUserData) {
+                res.status(404).json({ message: 'No user found with this id' });
+                return;
+            }
+            res.json(dbUserData)
+        })
+        .catch(err => res.json(err));
 
+    },
+    
+    // delete friend
+    deleteFriend({ params }, res) {
+        User.findOneAndUpdate(
+          { _id: params.id },
+          { $pull: { friends: params.friendId } },
+          { new: true }
+        )
+          .then((dbUserData) => {
+            if (!dbUserData) {
+              res.status(404).json({ message: 'No user found with this id' });
+              return;
+            }
+            res.json(dbUserData);
+          })
+          .catch((err) => res.status(400).json(err));
+      }
+    }
+    
 module.exports = userController;
