@@ -5,7 +5,7 @@ const dateFormat = require('../utils/dateFormat');
 const ReactionSchema = new Schema(
     {
         // reactionId
-        // set custom id to avoid confusion with parent reaction _id
+        // set custom id to avoid confusion with parent _id
         // Use Mongoose's ObjectId data type
         // Default value is set to a new ObjectId
         reactionId: {
