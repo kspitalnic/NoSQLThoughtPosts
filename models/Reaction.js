@@ -15,8 +15,8 @@ const ReactionSchema = new Schema(
         // reactionBody
         reactionBody: {
             type: String,
-            required: true
-            //280 CHAR MAX 
+            required: true,
+            maxlength: 280
         }, 
         username: {
             type: String,
@@ -30,8 +30,10 @@ const ReactionSchema = new Schema(
     },
     {
         toJSON: {
-            getters: true
-        }
+            getters: true,
+            virtuals: true
+        },
+        id: false
     }
 );
 
